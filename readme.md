@@ -16,6 +16,12 @@
 * freq_count.py:读取spell2char中的一二级汉字表中的全部汉字，学习data_format中的标准语料。统计各个汉字的出现频次及所有出现的二元词频次并存放在json文件中。
 * translator.py:通过读取频次表计算概率。translate函数实现了基于二元模型的viterbi算法，接受拼音文件并输出为output。
 
+二、可改进
+   当前使用的是字二元算法，可以考虑使用三元算法或词算法。
+   当前没有考虑多音字的影响，改进可考虑使用pypinyin
+
 语料素材链接：https://pan.baidu.com/s/16ruBIGMtTwEC1Foh3KHeEw  提取码：5186 
 
 --素材来自马少平老师人工智能导论课件
+
+

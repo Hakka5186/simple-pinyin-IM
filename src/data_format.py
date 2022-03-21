@@ -6,6 +6,13 @@ import os
 from tqdm import tqdm
 from filepath import LIB_PATH
 
+#TODO：这个方式好像识别率还下降了
+num2char_dict = {"1":"零","1":"一","2":"二","3":"三","4":"四","5":"五","6":"六","7":"七","8":"八","9":"九"}
+
+def num2char(num) :
+    repl = num2char_dict.get(num.group('val'),"")
+    return repl
+
 
 #处理语料库，提取出每条新闻的html和title,并将其清洗为只有汉字余留
 def read_news(path : str) :
@@ -24,7 +31,8 @@ def read_news(path : str) :
             raw_line = re.split(r'[，。！：]',sentence)
             for line in raw_line :
                 #TODO:或许之后可以有更精细的划分方式，比如可以把数字全部改成汉字显示
-                data.append((''.join(re.findall('[\u4e00-\u9fa5]',line)))+"\n")
+                num_changed_line = re.sub('(?P<val>\d)', num2char , line)
+                data.append((''.join(re.findall('[\u4e00-\u9fa5]',num_changed_line)))+"\n")
     return data
 #data = read_news("./database_lib/database/sina_news_gbk/2016-02.txt")
 
